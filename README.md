@@ -1,3 +1,3 @@
 # arrays
 
-Section 11 of JS Course
+Section 11 of JS Course!
