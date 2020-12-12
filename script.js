@@ -71,10 +71,10 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
-
+/*
 let arr = [`a`, `b`, `c`, `d`, `e`];
 
 //SLICE
@@ -109,3 +109,48 @@ console.log(...arr, ...arr2);
 
 //JOIN
 console.log(letters.join(` - `)); //a - b - c - d - e - f - g - h - i - j
+*/
+
+//FOR OF
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+//   for (const move of movements) {
+//     if (move > 0) {
+//       console.log(`you deposited ${move}`);
+//     } else {
+//       console.log(`you withdrew ${Math.abs(move)}`);
+//     }
+// }
+
+//FOR OF INDEXING
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+  for (const [i, move] of movements.entries()) {
+    if (move > 0) {
+      console.log(`Movement: ${i + 1} you deposited ${move}`);
+    } else {
+      console.log(`Movement: ${i + 1} you withdrew ${Math.abs(move)}`);
+    }
+}
+
+console.log(`------- FOR EACH -------`)
+
+//FOR EACH
+// movements.forEach(function(move){
+//     if (move > 0) {
+//       console.log(`you deposited ${move}`);
+//     } else {
+//       console.log(`you withdrew ${Math.abs(move)}`);
+//     }
+// });
+
+//FOR EACH INDEXING 
+//CANNOT BREAK OUT OF A FOR EACH LOOP
+//WILL RUN THROUGH THE WHOLE ARRAY
+movements.forEach(function(move, i, arr){
+  if (move > 0) {
+    console.log(`Movement: ${i + 1} you deposited ${move}`);
+  } else {
+    console.log(`Movement: ${i + 1} you withdrew ${Math.abs(move)}`);
+  }
+});
+
+
