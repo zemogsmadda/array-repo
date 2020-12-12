@@ -75,4 +75,37 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
+let arr = [`a`, `b`, `c`, `d`, `e`];
 
+//SLICE
+//DOES NOT MUTATE THE ARRAY 
+console.log(arr.slice(2)); // (3) [C, D, E]
+console.log(arr.slice(2, 4)); // (2) [C, D]
+console.log(arr.slice(-2)); // (2) [D, E]
+console.log(arr.slice(-1)); // (1) [E]
+console.log(arr.slice(1, -2)); // (2) [B, C]
+
+console.log(arr.slice()); //WILL PRINT THE ARRAY 
+console.log([...arr]); //PERSONAL PREFERENCE IF YOU WANT TO USE THIS OR ABOVE
+
+//SPLICE
+//MUTATES THE ARRAY 
+arr.splice(-1);
+arr.splice(1, 2);
+console.log(arr); //ELEMENTS ARE DELETED. OUTPUT = [A, D]
+
+//REVERSE
+//MUTATES THE ARRAY 
+arr = [`a`, `b`, `c`, `d`, `e`];
+const arr2 = [`j`, `i`, `h`, `g`, `f`];
+console.log(arr2.reverse()); //COMMON SENSE DUH
+console.log(arr2);
+
+//CONCAT 
+//PUTS ARRAYS TOGETHER
+const letters = arr.concat(arr2);
+console.log(letters);
+console.log(...arr, ...arr2);
+
+//JOIN
+console.log(letters.join(` - `)); //a - b - c - d - e - f - g - h - i - j
