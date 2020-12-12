@@ -111,6 +111,7 @@ console.log(...arr, ...arr2);
 console.log(letters.join(` - `)); //a - b - c - d - e - f - g - h - i - j
 */
 
+/*
 //FOR OF
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   for (const move of movements) {
@@ -152,5 +153,7 @@ movements.forEach(function(move, i, arr){
     console.log(`Movement: ${i + 1} you withdrew ${Math.abs(move)}`);
   }
 });
+*/
+
 
 
