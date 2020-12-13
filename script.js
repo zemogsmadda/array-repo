@@ -222,20 +222,19 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
-    // const type = mov > 0 ? `deposit` : `withdrawal`;
-const julia = [3, 5, 2, 12, 7];
-const kate = [4, 1, 15, 8, 3];
+// const julia = [3, 5, 2, 12, 7];
+// const kate = [4, 1, 15, 8, 3];
 
-function checkDogs(dogsJulia, dogsKate) {
-  const julia = dogsJulia.slice(1, -2);
+// function checkDogs(dogsJulia, dogsKate) {
+//   const julia = dogsJulia.slice(1, -2);
   
-  const allDogs = [...julia, ...dogsKate];
-  console.log(allDogs);
+//   const allDogs = [...julia, ...dogsKate];
+//   console.log(allDogs);
 
-  allDogs.forEach(function(value, key, _){
-    const howOld = value >= 3 ? `an adult` : `a puppy`;
-    console.log(`Dog number ${key + 1} is ${howOld}. Been in this world for ${value} years`);
-  });
-}
+//   allDogs.forEach(function(value, key, _){
+//     const howOld = value >= 3 ? `an adult` : `a puppy`;
+//     console.log(`Dog number ${key + 1} is ${howOld}. Been in this world for ${value} years`);
+//   });
+// }
+// checkDogs(julia, kate);
 
-checkDogs(julia, kate);
