@@ -238,4 +238,3 @@ GOOD LUCK 😀
 // }
 // checkDogs(julia, kate);
 
-let helllo = '';
