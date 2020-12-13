@@ -61,6 +61,9 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+/////////////////////////////////////////////////
+//DISPLAYS THE WITHDRAWALS AND DEPOSITS
+
 const displayMovements = function(movements) {
 
   containerMovements.innerHTML = ``; //REMOVES THE CONTENT OF AN HTML VALUE
@@ -80,8 +83,47 @@ const displayMovements = function(movements) {
 
   });
 };
-
 displayMovements(account1.movements);
+
+/////////////////////////////////////////////////
+//COMPUTING USERNAMES
+
+const createUsernames = function (accs) {
+
+  accs.forEach(function(acc){
+    acc.username = acc.owner
+    .toLowerCase()
+    .split(` `)
+    .map(name => name[0])
+    .join(``);
+  })
+
+};
+createUsernames(accounts);
+console.log(accounts);
+
+//WHAT I WROTE
+// const user = `Steven Thomas Williams`; //STW USERNAME
+// const username = user.toLowerCase().split(` `);
+// const initials = username.map(function(name){
+//     const firstLetter = name.slice(0, 1);
+//     return firstLetter;
+// });
+// const joined = initials.join(``);
+
+// console.log(username);
+// console.log(initials);
+// console.log(joined);
+
+//WHAT I SHOULDVE WRITTEN
+// const user = `Steven Thomas Williams`;
+// const username = user
+//   .toLowerCase()
+//   .split(` `)
+//   .map(name => name[0])
+//   .join(``);
+// console.log(username);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -238,3 +280,57 @@ GOOD LUCK 😀
 // }
 // checkDogs(julia, kate);
 
+/////////////////////////////////////////////////
+//MAP METHOD
+//WILL GIVE US A NEW ARRAY
+/*
+//FUNCTIONAL PROGRAMMING
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eurToUsd = 1.1;
+const movementsUSD = movements.map(function(mov){
+  return mov * eurToUsd;
+});
+
+console.log(movements);
+console.log(movementsUSD);
+
+//SAME THING AS ABOVE 
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+console.log(movementsUSDfor);
+
+//ARROW FUNCTION VERSION
+const arrowFunc = movements.map(mov => mov * eurToUsd);
+console.log(arrowFunc);
+
+const movementsDescription = movements.map((mov, i) => 
+`Movement ${i + 1}: You ${mov > 0 ? `deposited` : `withdrew`} ${Math.abs(mov)}`);
+
+  // if (mov > 0) {
+  //   return `Movement ${i + 1}: You deposited ${mov}`;
+  // } else {
+  //   return `Movement ${i + 1}: You withdrew ${Math.abs(mov)}`
+  // }
+
+console.log(movementsDescription);
+*/
+
+/////////////////////////////////////////////////
+//FILTER METHOD
+/*
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const deposits = movements.filter(function(mov){
+  return mov > 0;
+})
+console.log(deposits);
+console.log(movements);
+
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
+
+const withdrawals = movements.filter(function(mov){
+  return mov < 0;
+})
+console.log(withdrawals);
+*/
