@@ -102,6 +102,16 @@ const createUsernames = function (accs) {
 createUsernames(accounts);
 console.log(accounts);
 
+/////////////////////////////////////////////////
+//PRINT THE BALANCE
+
+const calcDisplayBalance = function(movements) {
+  const balance = movements.reduce((a, b)=> a +b);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcDisplayBalance(account1.movements);
+
 //WHAT I WROTE
 // const user = `Steven Thomas Williams`; //STW USERNAME
 // const username = user.toLowerCase().split(` `);
@@ -334,3 +344,23 @@ const withdrawals = movements.filter(function(mov){
 })
 console.log(withdrawals);
 */
+
+/////////////////////////////////////////////////
+//REDUCE METHOD
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// a - current value, b - number after a, c - index, d - source
+const balance = movements.reduce(function(a, b, c, d){
+  console.log( `Iteration ${c + 1}: ${a}`);
+  return a + b;
+}, 0)
+console.log(balance);
+
+//MAXIMUM VALUE 
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov)
+    return acc;
+    else
+      return mov;
+}, movements[0]);
+console.log(max);
