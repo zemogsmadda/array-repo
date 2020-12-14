@@ -75,7 +75,7 @@ const displayMovements = function(movements) {
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-        <div class="movements__value">${mov}</div>
+        <div class="movements__value">${mov}€</div>
       </div>
     `;
 
@@ -107,10 +107,36 @@ console.log(accounts);
 
 const calcDisplayBalance = function(movements) {
   const balance = movements.reduce((a, b)=> a +b);
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance}€`;
 };
 
 calcDisplayBalance(account1.movements);
+
+/////////////////////////////////////////////////
+//CALCULATE WITHDRAWAL, DEPOSIT, AND INTEREST
+
+const calcDisplaySummary = function(movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((a , b) => a + b);
+    labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((a , b) => a + b);
+    labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => deposit * 0.1/100)
+    .filter((int, i, arr) => {
+      return int >= 1;
+    })
+    .reduce((a, b) => a + b);
+    labelSumInterest.textContent = `${interest}€`
+}
+
+calcDisplaySummary(account1.movements);
 
 //WHAT I WROTE
 // const user = `Steven Thomas Williams`; //STW USERNAME
@@ -392,7 +418,7 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
 */
-
+/*
 const dogAges = [5, 2, 4, 1, 15, 8, 3];
 
 const calcAverageHumanAge = dogAges.map(function(dogAge){
@@ -416,3 +442,38 @@ const avgAges = legalDogs.reduce(function(a, b){
   return a + b;
 })
 console.log(avgAges / legalDogs.length);
+*/
+
+/////////////////////////////////////////////////
+//CHAINING METHODS
+/*
+const eurToUsd = 1.1;
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const totals = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * eurToUsd)
+  .reduce((a, b) => a + b);
+console.log(totals);
+
+/////////////////////////////////////////////////
+//CODING CHALLENGE 3
+*/
+/* 
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow 
+function, and using chaining!
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+/*
+const dogAges = [5, 2, 4, 1, 15, 8, 3];
+
+const calcAverageHumanAge = dogAges
+  .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+  .filter(humanAge => humanAge >= 18)
+  .reduce((a, b, c, d) => a + b / d.length, 0); //HAVE TO USE THE ORIGIN ARRAY NOT THE DOG AGES
+
+console.log(calcAverageHumanAge);
+*/
