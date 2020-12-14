@@ -6,7 +6,7 @@
 
 // Data
 const account1 = {
-  owner: 'Jonas Schmedtmann',
+  owner: 'Paul Gonzales',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
@@ -83,7 +83,7 @@ const displayMovements = function(movements) {
 
   });
 };
-displayMovements(account1.movements);
+ 
 
 /////////////////////////////////////////////////
 //COMPUTING USERNAMES
@@ -110,25 +110,25 @@ const calcDisplayBalance = function(movements) {
   labelBalance.textContent = `${balance}€`;
 };
 
-calcDisplayBalance(account1.movements);
+
 
 /////////////////////////////////////////////////
 //CALCULATE WITHDRAWAL, DEPOSIT, AND INTEREST
 
-const calcDisplaySummary = function(movements) {
-  const incomes = movements
+const calcDisplaySummary = function(acc) {
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((a , b) => a + b);
     labelSumIn.textContent = `${incomes}€`;
 
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((a , b) => a + b);
     labelSumOut.textContent = `${Math.abs(out)}€`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => deposit * 0.1/100)
+    .map(deposit => deposit * acc.interestRate/100)
     .filter((int, i, arr) => {
       return int >= 1;
     })
@@ -136,7 +136,38 @@ const calcDisplaySummary = function(movements) {
     labelSumInterest.textContent = `${interest}€`
 }
 
-calcDisplaySummary(account1.movements);
+
+
+/////////////////////////////////////////////////
+//LOGIN INFO
+
+let currentAccount;
+
+btnLogin.addEventListener(`click`, function(e){
+  //PREVENTS FORM FROM SUBMITTING
+  e.preventDefault();
+
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //DISPLAY UI AND WELCOME MESSAGE
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split( ` `)[0]}`;
+    containerApp.style.opacity = 100;
+
+    //CLEAR INPUT FIELDS
+    inputLoginUsername.value = inputLoginPin.value =  ``;
+
+    //DISPLAY MOVEMENTS
+    displayMovements(currentAccount.movements);
+
+    //DISPLAY BALANCE
+    calcDisplayBalance(currentAccount.movements);
+
+    //DISPLAY SUMMARY
+    calcDisplaySummary(currentAccount);
+  }
+});
 
 //WHAT I WROTE
 // const user = `Steven Thomas Williams`; //STW USERNAME
@@ -477,3 +508,20 @@ const calcAverageHumanAge = dogAges
 
 console.log(calcAverageHumanAge);
 */
+
+/////////////////////////////////////////////////
+//FIND METHOD
+//DIFFERENT FROM FILTER BASED ON TWO THINGS
+  // 1. FILTER RETURNS EVERYTHING THAT SATISFIES THE CONDITION
+  // 2. FILTER RETURNS AN ARRAY, FIND ONLY RETURNS THE ELEMENT
+/*
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const test = movements.find(mov => mov < 0); //WILL LOG THE FIRST VALUE TO SATISFY THIS
+console.log(test);
+
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === `Jessica Davis`);
+console.log(account); 
+*/
+
