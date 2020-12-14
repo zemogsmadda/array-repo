@@ -80,7 +80,6 @@ const displayMovements = function(movements) {
     `;
 
     containerMovements.insertAdjacentHTML(`afterbegin`, html); //(POSITION WHERE YOU WANT TO BEGIN, STRING YOU WANT TO INSERT)
-
   });
 };
  
@@ -100,17 +99,26 @@ const createUsernames = function (accs) {
 
 };
 createUsernames(accounts);
-console.log(accounts);
+
+const updateUI = function(acc) 
+{
+  //DISPLAY MOVEMENTS
+  displayMovements(acc.movements);
+
+  //DISPLAY BALANCE
+  calcDisplayBalance(acc);
+
+  //DISPLAY SUMMARY
+  calcDisplaySummary(acc);
+};
 
 /////////////////////////////////////////////////
 //PRINT THE BALANCE
 
-const calcDisplayBalance = function(movements) {
-  const balance = movements.reduce((a, b)=> a +b);
-  labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function(acc) {
+  acc.balance = acc.movements.reduce((a, b)=> a +b);
+  labelBalance.textContent = `${acc.balance}€`;
 };
-
-
 
 /////////////////////////////////////////////////
 //CALCULATE WITHDRAWAL, DEPOSIT, AND INTEREST
@@ -136,8 +144,6 @@ const calcDisplaySummary = function(acc) {
     labelSumInterest.textContent = `${interest}€`
 }
 
-
-
 /////////////////////////////////////////////////
 //LOGIN INFO
 
@@ -157,18 +163,32 @@ btnLogin.addEventListener(`click`, function(e){
 
     //CLEAR INPUT FIELDS
     inputLoginUsername.value = inputLoginPin.value =  ``;
-
-    //DISPLAY MOVEMENTS
-    displayMovements(currentAccount.movements);
-
-    //DISPLAY BALANCE
-    calcDisplayBalance(currentAccount.movements);
-
-    //DISPLAY SUMMARY
-    calcDisplaySummary(currentAccount);
+    inputLoginPin.blur();
+    updateUI(currentAccount);
   }
 });
 
+btnTransfer.addEventListener(`click`, function(e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
+
+  inputTransferAmount.value = inputTransferTo.value = ``;
+
+  if(
+    amount > 0 && 
+    currentAccount.balance >= amount && 
+    receiverAcc?.username !== currentAccount.username) 
+    {
+      //TRANSFER FUNCTIONALITY
+      currentAccount.movements.push(-amount);
+      receiverAcc.movements.push(amount);
+
+      //UPDATE UI
+      updateUI(currentAccount);
+    }
+});
+ 
 //WHAT I WROTE
 // const user = `Steven Thomas Williams`; //STW USERNAME
 // const username = user.toLowerCase().split(` `);
