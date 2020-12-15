@@ -186,8 +186,35 @@ btnTransfer.addEventListener(`click`, function(e) {
 
       //UPDATE UI
       updateUI(currentAccount);
-    }
+    } 
 });
+
+/////////////////////////////////////////////////
+//CLOSING AN ACCOUNT
+
+btnClose.addEventListener(`click`, function(e) {
+  e.preventDefault();
+
+
+  if (inputCloseUsername.value === currentAccount.username &&
+     Number(inputClosePin.value) === currentAccount.pin) 
+    {
+    const index = accounts
+      .findIndex(acc => acc.username === currentAccount.username);
+
+    console.log(index);
+
+    //DELETE ACCOUNT
+    accounts.splice(index, 1);
+
+    //HIDE UI
+    containerApp.style.opacity = 0;
+    }
+  
+    inputCloseUsername.value = inputClosePin.value = ``;
+})
+
+
  
 //WHAT I WROTE
 // const user = `Steven Thomas Williams`; //STW USERNAME
@@ -544,4 +571,9 @@ console.log(accounts);
 const account = accounts.find(acc => acc.owner === `Jessica Davis`);
 console.log(account); 
 */
+
+///////////////////////////////////////
+// FIND INDEX
+
+//INCLUDED IN THE DELETE ACCOUNT FUNCTIONALITY ABOVE
 
