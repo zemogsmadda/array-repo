@@ -168,6 +168,9 @@ btnLogin.addEventListener(`click`, function(e){
   }
 });
 
+/////////////////////////////////////////////////
+//TRANSFER
+
 btnTransfer.addEventListener(`click`, function(e) {
   e.preventDefault();
   const amount = Number(inputTransferAmount.value);
@@ -188,6 +191,26 @@ btnTransfer.addEventListener(`click`, function(e) {
       updateUI(currentAccount);
     } 
 });
+
+/////////////////////////////////////////////////
+//LOAN 
+
+btnLoan.addEventListener(`click`, function(e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) 
+  {
+    //ADD MOVEMENT
+    currentAccount.movements.push(amount);
+
+    //UPDATE UI
+    updateUI(currentAccount);
+  };
+
+  inputLoanAmount.value = ``;  
+})
 
 /////////////////////////////////////////////////
 //CLOSING AN ACCOUNT
@@ -577,3 +600,29 @@ console.log(account);
 
 //INCLUDED IN THE DELETE ACCOUNT FUNCTIONALITY ABOVE
 
+
+///////////////////////////////////////
+// SOME AND EVERY
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements);
+
+//CHECKS FOR EQUALITY
+console.log(movements.includes(-130));
+
+//CAN SPECIFY A CONDITION
+const anyDeposits = movements.some(mov => mov > 5000)
+console.log(anyDeposits);
+
+
+//EVERY
+//WILL RETURN TRUE IF ALL THE ELEMENTS IN THE ARRAY ARE TRUE
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
+//SEPARATE CALLBACK
+//DRY
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
