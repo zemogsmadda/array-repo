@@ -64,11 +64,13 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 //DISPLAYS THE WITHDRAWALS AND DEPOSITS
 
-const displayMovements = function(movements) {
+const displayMovements = function(movements, sort = false) {
 
   containerMovements.innerHTML = ``; //REMOVES THE CONTENT OF AN HTML VALUE
 
-  movements.forEach(function(mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function(mov, i) {
 
     const type = mov > 0 ? `deposit` : `withdrawal`;
 
@@ -81,7 +83,7 @@ const displayMovements = function(movements) {
 
     containerMovements.insertAdjacentHTML(`afterbegin`, html); //(POSITION WHERE YOU WANT TO BEGIN, STRING YOU WANT TO INSERT)
   });
-};
+}; 
  
 
 /////////////////////////////////////////////////
@@ -237,6 +239,16 @@ btnClose.addEventListener(`click`, function(e) {
     inputCloseUsername.value = inputClosePin.value = ``;
 })
 
+/////////////////////////////////////////////////
+//MOVEMENT SORTING
+
+let sorted = false;
+
+btnSort.addEventListener(`click`, function(e){
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+})
 
  
 //WHAT I WROTE
@@ -628,7 +640,8 @@ console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
 */
 
-//FLAT AND FLATMAP
+///////////////////////////////////////
+// FLAT AND FLATMAP
 //FLAT
 /*
 const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
@@ -650,3 +663,29 @@ console.log(overallBalance);
 //FLAT MAP 
 //DOES THE MAPPING AND FLAT METHOD AT THE SAME TIME 
 
+///////////////////////////////////////
+// SORTING ARRAYS
+/*
+//STRINGS
+const owners = [`Paul`, `Jonas`, `Adam`, `Martha`];
+console.log(owners.sort()); //SORTED AND MUTATED THE OWNERS ARRAY INTO ALPHABETICAL ORDER
+
+//NUMBERS
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements);
+//console.log(movements.sort()); //SORTING BASED ON STRINGS BY DEFAULT
+
+//RETURN < 0, A, B (KEEP ORDER)
+//RETURN > 0, B, A (SWITCH ORDER)
+// movements.sort((a, b) => {
+//   if (a > b)
+//     return 1;
+//   if (a < b)
+//     return -1;
+// });
+
+movements.sort((a, b) => a - b); //ASCENDING
+movements.sort((a, b) => b - a); //DESCENDING
+
+console.log(movements);
+*/
