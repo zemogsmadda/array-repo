@@ -689,3 +689,41 @@ movements.sort((a, b) => b - a); //DESCENDING
 
 console.log(movements);
 */
+
+///////////////////////////////////////
+//MORE WAYS OF CREATING AND FILLING ARRAYS
+
+//TRADITIONAL ARRAY FILLING
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+const x = new Array(7);
+console.log(x); //OUTPUT CREATES AN ARRAY WITH 7 EMPTY ELEMENTS
+                //7 IS THE LENGTH OF THE ARRAY
+
+// x.fill(1);  //[1, 1, 1, 1, 1, 1, 1, 1]
+x.fill(1, 3); //[EMPTY X 3, 1, 1, 1, 1]
+console.log(x);   
+
+arr.fill(23, 2, 6);
+console.log(arr); // [1, 2, 23, 23, 23, 23, 7]
+
+//ARRAY.FROM
+const y = Array.from({length: 10}, () => 1);
+console.log(y);
+
+const z = Array.from({length: 7}, (_, i) => i + 1);
+console.log(z);
+
+labelBalance.addEventListener(`click`, function() {
+
+  const movementsUI = Array.from(document.querySelectorAll(`.movements__value`), 
+  el => Number(el.textContent.replace(`€`, ``))
+  );
+  console.log(movementsUI);
+
+  //WILL HAVE TO DO SEPARATE MAPPING SEQUENCE SO ITS BETTER TO USE THE ONE ABOVE
+  const movementsUI2 = [...document.querySelectorAll(`.movements__value`)];
+  console.log(movementsUI2);
+});
+
