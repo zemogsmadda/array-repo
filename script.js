@@ -600,7 +600,7 @@ console.log(account);
 
 //INCLUDED IN THE DELETE ACCOUNT FUNCTIONALITY ABOVE
 
-
+/*
 ///////////////////////////////////////
 // SOME AND EVERY
 
@@ -626,3 +626,27 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
+*/
+
+//FLAT AND FLATMAP
+//FLAT
+/*
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat()); //WILL PRINT EVERYTHING IN ONE ARRAY BUT ONLY ONE 
+                          //LAYER OF ARRAY DEEP FOR DEFAULT
+
+const arrDeep = [[1, [2, 3]], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2)); //CAN CHANGE THE DEPTH THAT THIS CAN OPERATE
+
+const accountMovements = accounts.map(acc => acc.movements);
+console.log(accountMovements);
+
+const allMovements = accountMovements.flat();
+console.log(allMovements);
+
+const overallBalance = allMovements.reduce((a, b) => a + b);
+console.log(overallBalance);
+*/
+//FLAT MAP 
+//DOES THE MAPPING AND FLAT METHOD AT THE SAME TIME 
+
