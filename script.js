@@ -769,10 +769,8 @@ const dogs = [
 GOOD LUCK 😀
 */
 
-// 2. Find Sarah's dog and log to the console whether it's eating too much or too little. HINT: Some dogs have multiple owners, so you first need to find Sarah
-//     in the owners array, and so this one is a bit tricky (on purpose) 🤓
-
-
+/*
+//1
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
   { weight: 8, curFood: 200, owners: ['Matilda'] },
@@ -783,19 +781,84 @@ const dogs = [
 dogs.forEach(function(value, key, map){
 
   const dogsRecommended = Math.floor(Number(Object.values(value)[0] ** 0.75 * 28));
-  dogs[key].recommendedFood = `${dogsRecommended}g`;
- 
-  
-  const owners = dogs[key].owners;
-  const weight = dogs[key].weight;
-
-  const found = owners.find(dogOwner => dogOwner === `Sarah`);
-  const sarahsDog = 
-
-  if (found === `Sarah` ) {
-    console.log(`Sarah`);
-  }
+  dogs[key].recommendedFood = dogsRecommended;  
 
 });
 
-console.log(dogs);
+
+//2
+const dogSarah = dogs.find(function(dog, _, __){
+  
+  return dog.owners.includes(`Sarah`);
+
+});
+
+const curSarah = dogSarah.curFood;
+const recSarah = dogSarah.recommendedFood;
+
+if (curSarah > recSarah) {
+  console.log(`Sarahs dog is eating too much`);
+} else {
+  console.log(`Sarahs dog is eating too little`);
+}
+
+//3
+const ownersEatTooLittle = dogs
+.filter(function(dogs) {
+  return dogs.curFood < dogs.recommendedFood 
+})
+.map(function(dogs){
+  return dogs.owners;
+})
+.flat();
+
+const ownersEatTooMuch = dogs
+.filter(function(dogs) {
+  return dogs.curFood > dogs.recommendedFood 
+})
+.map(function(dogs){
+  return dogs.owners;
+})
+.flat();
+
+console.log(ownersEatTooLittle);
+console.log(ownersEatTooMuch);
+
+//4
+const tooMuch = ownersEatTooMuch.join(` `);
+console.log(`The owner's that feed too much are ${tooMuch}`);
+
+const tooLittle = ownersEatTooLittle.join(` `);
+console.log(`The owner's that feed too little are ${tooLittle}`);
+
+//5 
+const exactAmount = dogs
+.map(function(dogs){
+  return dogs;
+})
+.includes(function(dogs){
+  return dogs.curFood === dogs.dogsRecommended;
+})
+console.log(exactAmount);
+
+//6
+const eatingOkay = dogs
+.map(function(dogs){
+  return dogs;
+})
+.some(function(dogs){
+  return dogs.curFood > (dogs.recommendedFood * 0.90) && dogs.curFood < (dogs.recommendedFood * 1.10);
+})
+console.log(eatingOkay);
+
+//7 FUCK THIS QUESTION
+
+//8 
+const dogsCopy = dogs
+.slice()
+.sort(function(a, b) {
+  return a.recommendedFood - b.recommendedFood; //ASCENDING
+  // return b.recommendedFood - a.recommendedFood; //DESCENDING
+})
+console.log(dogsCopy);
+*/
